@@ -1,0 +1,137 @@
+.cart {
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - 60px);
+}
+
+.cart__inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.cart__header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.cart__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text, #1a1a1a);
+}
+
+.cart__count {
+  font-size: 1rem;
+  color: var(--text-muted, #666);
+}
+
+.cart__table-wrap {
+  margin-bottom: 1.5rem;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.cart__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart__table th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted, #666);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: var(--gray-100, #f1f5f9);
+  border-bottom: 2px solid var(--border, #e2e8f0);
+}
+
+.cart__table th:last-child {
+  text-align: right;
+}
+
+.cart__footer {
+  padding: 1.25rem;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.cart__total {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: var(--text, #1a1a1a);
+}
+
+.cart__total strong {
+  color: var(--accent, #2563eb);
+}
+
+.cart__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cart__btn {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cart__btn--primary {
+  background: var(--accent, #2563eb);
+  color: #fff;
+}
+
+.cart__btn--primary:hover {
+  background: var(--accent-hover, #1d4ed8);
+}
+
+.cart__btn--secondary {
+  background: transparent;
+  color: var(--text-muted, #666);
+  border: 1px solid var(--border, #e5e5e5);
+}
+
+.cart__btn--secondary:hover {
+  background: var(--gray-100, #f5f5f5);
+  color: var(--text, #1a1a1a);
+}
+
+/* Empty state */
+.cart--empty .cart__inner {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.cart__empty-text {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  color: var(--text-muted, #666);
+}
+
+.cart__link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent, #2563eb);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.cart__link:hover {
+  background: var(--accent-hover, #1d4ed8);
+}
