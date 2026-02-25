@@ -1,14 +1,19 @@
 import { useParams, Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCart } from '../store/selectors/cartSelectors';
+import { addToCart } from '../store/actions/cartActions';
 import { PRODUCTS } from '../const/products';
 import './ProductPage.css';
 
 export default function ProductPage() {
   const { id } = useParams();
-  const { cart, addToCart } = useCart();
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
   const product = PRODUCTS.find((p) => p.id === id);
   const inCart = product ? cart.find((item) => item.id === product.id) : null;
   const quantity = inCart ? inCart.quantity : 0;
+
+  const handleAddToCart = () => dispatch(addToCart(product));
 
   if (!product) {
     return (
@@ -46,7 +51,7 @@ export default function ProductPage() {
             <button
               type="button"
               className="product-page__btn"
-              onClick={() => addToCart(product)}
+              onClick={handleAddToCart}
             >
               {quantity ? `В корзине: ${quantity}` : 'В корзину'}
             </button>

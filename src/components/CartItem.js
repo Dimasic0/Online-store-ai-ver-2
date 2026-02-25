@@ -1,8 +1,9 @@
-import { useCart } from '../context/CartContext';
+import { useDispatch } from 'react-redux';
+import { removeFromCart, setQuantity } from '../store/actions/cartActions';
 import './CartItem.css';
 
 export default function CartItem({ item }) {
-  const { removeFromCart, setQuantity } = useCart();
+  const dispatch = useDispatch();
   const { id, title, price, image, quantity } = item;
 
   return (
@@ -21,7 +22,7 @@ export default function CartItem({ item }) {
           <button
             type="button"
             className="cart-item__qty-btn"
-            onClick={() => setQuantity(id, quantity - 1)}
+            onClick={() => dispatch(setQuantity(id, quantity - 1))}
             aria-label="Уменьшить количество"
           >
             −
@@ -30,7 +31,7 @@ export default function CartItem({ item }) {
           <button
             type="button"
             className="cart-item__qty-btn"
-            onClick={() => setQuantity(id, quantity + 1)}
+            onClick={() => dispatch(setQuantity(id, quantity + 1))}
             aria-label="Увеличить количество"
           >
             +
@@ -44,7 +45,7 @@ export default function CartItem({ item }) {
         <button
           type="button"
           className="cart-item__remove"
-          onClick={() => removeFromCart(id)}
+          onClick={() => dispatch(removeFromCart(id))}
           aria-label="Удалить из корзины"
         >
           Удалить

@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCart, selectCartTotal, selectCartCount } from '../store/selectors/cartSelectors';
+import { clearCart } from '../store/actions/cartActions';
 import CartItem from '../components/CartItem';
 import './CartPage.css';
 
 export default function CartPage() {
-  const { cart, cartTotal, cartCount, clearCart } = useCart();
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
+  const cartTotal = useSelector(selectCartTotal);
+  const cartCount = useSelector(selectCartCount);
+
+  const handleClearCart = () => dispatch(clearCart());
 
   if (cart.length === 0) {
     return (
@@ -50,7 +57,7 @@ export default function CartPage() {
             Итого: <strong>{cartTotal.toLocaleString('ru-RU')} ₽</strong>
           </div>
           <div className="cart__actions">
-            <button type="button" className="cart__btn cart__btn--secondary" onClick={clearCart}>
+            <button type="button" className="cart__btn cart__btn--secondary" onClick={handleClearCart}>
               Очистить корзину
             </button>
             <button type="button" className="cart__btn cart__btn--primary">

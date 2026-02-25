@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useSelector } from 'react-redux';
+import { selectCartCount } from '../store/selectors/cartSelectors';
 import './Header.css';
 
 export default function Header() {
-  const { cartCount } = useCart();
+  const cartCount = useSelector(selectCartCount);
   const location = useLocation();
 
   return (

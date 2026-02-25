@@ -1,12 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCart } from '../store/selectors/cartSelectors';
+import { addToCart } from '../store/actions/cartActions';
 import './ProductCard.css';
 
 export default function ProductCard({ product }) {
-  const { cart, addToCart } = useCart();
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
   const { id, title, price, image, description } = product;
   const inCart = cart.find((item) => item.id === id);
   const quantity = inCart ? inCart.quantity : 0;
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    dispatch(addToCart(product));
+  };
 
   return (
     <article className="product-card">
@@ -25,10 +33,7 @@ export default function ProductCard({ product }) {
           <button
             type="button"
             className="product-card__btn"
-            onClick={(e) => {
-              e.preventDefault();
-              addToCart(product);
-            }}
+            onClick={handleAddToCart}
             aria-label={quantity ? `В корзине ${quantity} шт.` : `Добавить ${title} в корзину`}
           >
             {quantity ? `В корзине: ${quantity}` : 'В корзину'}
