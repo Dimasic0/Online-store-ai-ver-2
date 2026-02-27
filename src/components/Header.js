@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartCount } from '../store/selectors/cartSelectors';
 import './Header.css';
 
-export default function Header() {
+function Header() {
   const cartCount = useSelector(selectCartCount);
   const location = useLocation();
 
@@ -32,3 +33,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default memo(Header);

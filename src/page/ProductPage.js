@@ -2,14 +2,14 @@ import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart } from '../store/selectors/cartSelectors';
 import { addToCart } from '../store/actions/cartActions';
-import { PRODUCTS } from '../const/products';
+import { selectProductById } from '../store/selectors/productsSelectors';
 import './ProductPage.css';
 
 export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-  const product = PRODUCTS.find((p) => p.id === id);
+  const product = useSelector((state) => selectProductById(state, id));
   const inCart = product ? cart.find((item) => item.id === product.id) : null;
   const quantity = inCart ? inCart.quantity : 0;
 

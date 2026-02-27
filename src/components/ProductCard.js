@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart } from '../store/selectors/cartSelectors';
 import { addToCart } from '../store/actions/cartActions';
 import './ProductCard.css';
 
-export default function ProductCard({ product }) {
+function ProductCard({ product }) {
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
   const { id, title, price, image, description } = product;
@@ -43,3 +44,5 @@ export default function ProductCard({ product }) {
     </article>
   );
 }
+
+export default memo(ProductCard);
