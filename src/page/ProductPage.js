@@ -1,19 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCart } from '../store/selectors/cartSelectors';
-import { addToCart } from '../store/actions/cartActions';
-import { selectProductById } from '../store/selectors/productsSelectors';
+import AddCartButton from '../components/AddCartButton';
+import { useProductById } from '../store/hooks';
 import './ProductPage.css';
 
 export default function ProductPage() {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const cart = useSelector(selectCart);
-  const product = useSelector((state) => selectProductById(state, id));
-  const inCart = product ? cart.find((item) => item.id === product.id) : null;
-  const quantity = inCart ? inCart.quantity : 0;
-
-  const handleAddToCart = () => dispatch(addToCart(product));
+  const product = useProductById(id);
 
   if (!product) {
     return (
@@ -48,13 +40,7 @@ export default function ProductPage() {
             <h1 className="product-page__title">{title}</h1>
             <p className="product-page__description">{description}</p>
             <p className="product-page__price">{price.toLocaleString('ru-RU')} ₽</p>
-            <button
-              type="button"
-              className="product-page__btn"
-              onClick={handleAddToCart}
-            >
-              {quantity ? `В корзине: ${quantity}` : 'В корзину'}
-            </button>
+            <AddCartButton product={product} className="product-page__btn" />
           </div>
         </div>
       </div>

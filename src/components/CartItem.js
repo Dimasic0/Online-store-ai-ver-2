@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useCartQuantity } from '../store/hooks';
 import { removeFromCart, setQuantity } from '../store/actions/cartActions';
 import './CartItem.css';
 
 function CartItem({ item }) {
-  const dispatch = useDispatch();
-  const { id, title, price, image, quantity } = item;
+  const dispatch = useAppDispatch();
+  const { id, title, price, image } = item;
+  const quantity = useCartQuantity(id) || 0;
 
   return (
     <tr className="cart-item">

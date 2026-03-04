@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux';
-import { selectProducts } from '../store/selectors/productsSelectors';
+import { useProducts } from '../store/hooks';
 import ProductCard from '../components/ProductCard';
 import './CatalogPage.css';
 
 export default function CatalogPage() {
-  const products = useSelector(selectProducts);
+  const products = useProducts();
 
   return (
     <main className="catalog">

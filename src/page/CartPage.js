@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCart, selectCartTotal, selectCartCount } from '../store/selectors/cartSelectors';
 import { clearCart } from '../store/actions/cartActions';
+import { useCart, useCartTotal, useCartCount, useAppDispatch } from '../store/hooks';
 import CartItem from '../components/CartItem';
 import './CartPage.css';
 
 export default function CartPage() {
-  const dispatch = useDispatch();
-  const cart = useSelector(selectCart);
-  const cartTotal = useSelector(selectCartTotal);
-  const cartCount = useSelector(selectCartCount);
+  const dispatch = useAppDispatch();
+  const cart = useCart();
+  const cartTotal = useCartTotal();
+  const cartCount = useCartCount();
 
   const handleClearCart = () => dispatch(clearCart());
 
