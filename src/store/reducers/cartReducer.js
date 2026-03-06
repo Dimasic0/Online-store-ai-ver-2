@@ -1,11 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addToCart, removeFromCart, setQuantity, clearCart } from '../actions/cartActions';
+import { addCart, removeCartItem, setQuantity, clearCart } from '../actions/cartActions';
 
 const initialState = [];
 
 const cartReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(addToCart, (state, action) => {
+    .addCase(addCart, (state, action) => {
       const { id, quantity = 1, ...product } = action.payload;
       const existing = state.find((i) => i.id === id);
       if (existing) {
@@ -14,7 +14,7 @@ const cartReducer = createReducer(initialState, (builder) => {
       }
       state.push({ id, ...product, quantity });
     })
-    .addCase(removeFromCart, (state, action) => {
+    .addCase(removeCartItem, (state, action) => {
       return state.filter((i) => i.id !== action.payload);
     })
     .addCase(setQuantity, (state, action) => {

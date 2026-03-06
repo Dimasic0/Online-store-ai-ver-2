@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { clearCart } from '../store/actions/cartActions';
 import { useCart, useCartTotal, useCartCount, useAppDispatch } from '../store/hooks';
 import CartItem from '../components/CartItem';
+import { formatPrice } from '../const/format';
 import './CartPage.css';
 
 export default function CartPage() {
@@ -53,7 +54,7 @@ export default function CartPage() {
         </div>
         <div className="cart__footer">
           <div className="cart__total">
-            Итого: <strong>{cartTotal.toLocaleString('ru-RU')} ₽</strong>
+            Итого: <strong>{formatPrice(cartTotal)}</strong>
           </div>
           <div className="cart__actions">
             <button type="button" className="cart__btn cart__btn--secondary" onClick={handleClearCart}>

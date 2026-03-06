@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import AddCartButton from '../components/AddCartButton';
 import { useProductById } from '../store/hooks';
+import { formatPrice } from '../const/format';
 import './ProductPage.css';
 
 export default function ProductPage() {
@@ -39,7 +40,7 @@ export default function ProductPage() {
           <div className="product-page__info">
             <h1 className="product-page__title">{title}</h1>
             <p className="product-page__description">{description}</p>
-            <p className="product-page__price">{price.toLocaleString('ru-RU')} ₽</p>
+            <p className="product-page__price">{formatPrice(price)}</p>
             <AddCartButton product={product} className="product-page__btn" />
           </div>
         </div>

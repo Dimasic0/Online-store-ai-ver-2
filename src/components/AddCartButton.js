@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import { useAppDispatch, useCartQuantity } from '../store/hooks';
-import { addToCart } from '../store/actions/cartActions';
+import { addCart } from '../store/actions/cartActions';
 
-function AddCartButton({ product, className}) {
+export default function AddCartButton({ product, className}) {
   const dispatch = useAppDispatch();
   const quantity = useCartQuantity(product?.id) || 0;
 
-  const handleClick = (evt) => {
-    dispatch(addToCart(product));
+  const handleClick = () => {
+    dispatch(addCart(product));
   };
 
   return (
@@ -25,6 +25,3 @@ function AddCartButton({ product, className}) {
     </button>
   );
 }
-
-export default memo(AddCartButton);
-

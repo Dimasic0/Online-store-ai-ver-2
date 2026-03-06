@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { useAppDispatch, useCartQuantity } from '../store/hooks';
-import { removeFromCart, setQuantity } from '../store/actions/cartActions';
+import { removeCartItem, setQuantity } from '../store/actions/cartActions';
+import { formatPrice } from '../const/format';
 import './CartItem.css';
 
 function CartItem({ item }) {
@@ -18,7 +19,7 @@ function CartItem({ item }) {
           <span className="cart-item__title">{title}</span>
         </div>
       </td>
-      <td className="cart-item__cell">{price.toLocaleString('ru-RU')} ₽</td>
+      <td className="cart-item__cell">{formatPrice(price)}</td>
       <td className="cart-item__cell">
         <div className="cart-item__quantity">
           <button
@@ -41,13 +42,13 @@ function CartItem({ item }) {
         </div>
       </td>
       <td className="cart-item__cell cart-item__cell--total">
-        {(price * quantity).toLocaleString('ru-RU')} ₽
+        {formatPrice(price * quantity)}
       </td>
       <td className="cart-item__cell">
         <button
           type="button"
           className="cart-item__remove"
-          onClick={() => dispatch(removeFromCart(id))}
+          onClick={() => dispatch(removeCartItem(id))}
           aria-label="Удалить из корзины"
         >
           Удалить

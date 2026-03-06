@@ -1,0 +1,9 @@
+---
+description: Правило именования функций в Redux actions — запрещает использовать предлоги в названиях функций в папке store/actions
+globs: src/store/actions/**/*.js
+alwaysApply: false
+---
+
+# Именование функций в actions
+
+- **В папке `store/actions` нельзя использовать предлоги в названиях функциях.**
