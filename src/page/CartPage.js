@@ -1,6 +1,8 @@
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { clearCart } from '../store/actions/cartActions';
-import { useCart, useCartTotal, useCartCount, useAppDispatch } from '../store/hooks';
+import { applyPromoCode, clearPromoCode } from '../store/actions/promoActions';
+import { useCart, useCartTotal, useCartTotalWithPromo, useCartCount, usePromo, useAppDispatch } from '../store/hooks';
 import CartItem from '../components/CartItem';
 import { formatPrice } from '../const/format';
 import './CartPage.css';
@@ -9,9 +11,22 @@ export default function CartPage() {
   const dispatch = useAppDispatch();
   const cart = useCart();
   const cartTotal = useCartTotal();
+  const cartTotalWithPromo = useCartTotalWithPromo();
   const cartCount = useCartCount();
+  const promo = usePromo();
+  const [promoInput, setPromoInput] = useState('');
 
   const handleClearCart = () => dispatch(clearCart());
+
+  const handlePromoSubmit = useCallback((evt) => {
+    evt.preventDefault();
+    dispatch(applyPromoCode(promoInput.trim()));
+  }, [dispatch, promoInput]);
+
+  const handleClearPromo = useCallback(() => {
+    dispatch(clearPromoCode());
+    setPromoInput('');
+  }, [dispatch]);
 
   if (cart.length === 0) {
     return (
@@ -52,10 +67,51 @@ export default function CartPage() {
             </tbody>
           </table>
         </div>
+
+        <div className="cart__promo">
+          <form className="cart__promo-form" onSubmit={handlePromoSubmit}>
+            <input
+              type="text"
+              className="cart__promo-input"
+              placeholder="Введите промокод"
+              value={promoInput}
+              onChange={(evt) => setPromoInput(evt.target.value)}
+              disabled={promo.isValid}
+            />
+            {promo.isValid ? (
+              <button type="button" className="cart__promo-btn cart__promo-btn--clear" onClick={handleClearPromo}>
+                Удалить
+              </button>
+            ) : (
+              <button type="submit" className="cart__promo-btn">
+                Применить
+              </button>
+            )}
+          </form>
+          {promo.code && (
+            <p className={`cart__promo-message ${promo.isValid ? 'cart__promo-message--success' : 'cart__promo-message--error'}`}>
+              {promo.isValid
+                ? `Промокод "${promo.code}" применён! Скидка ${promo.discount}%`
+                : `Промокод "${promo.code}" недействителен`}
+            </p>
+          )}
+        </div>
+
         <div className="cart__footer">
-          <div className="cart__total">
-            Итого: <strong>{formatPrice(cartTotal)}</strong>
-          </div>
+          {promo.isValid ? (
+            <div className="cart__total-wrap">
+              <div className="cart__total-old">
+                Сумма без скидки: <span>{formatPrice(cartTotal)}</span>
+              </div>
+              <div className="cart__total">
+                Итого: <strong>{formatPrice(cartTotalWithPromo)}</strong>
+              </div>
+            </div>
+          ) : (
+            <div className="cart__total">
+              Итого: <strong>{formatPrice(cartTotal)}</strong>
+            </div>
+          )}
           <div className="cart__actions">
             <button type="button" className="cart__btn cart__btn--secondary" onClick={handleClearCart}>
               Очистить корзину

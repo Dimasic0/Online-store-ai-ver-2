@@ -1,13 +1,29 @@
 import { memo } from 'react';
 import { useAppDispatch, useCartQuantity } from '../store/hooks';
 import { removeCartItem, setQuantity } from '../store/actions/cartActions';
-import { formatPrice } from '../const/format';
+import { showCartLimitMessage } from '../store/actions/notificationActions';
+import { formatPrice, getDiscountedPrice } from '../const/format';
+import { MAX_PER_PRODUCT } from '../const/cart';
 import './CartItem.css';
 
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
-  const { id, title, price, image } = item;
+  const { id, title, price, image, discount } = item;
   const quantity = useCartQuantity(id) || 0;
+  const discountedPrice = getDiscountedPrice(price, discount);
+  const hasDiscount = discount != null && discount > 0;
+
+  const handleDecrease = () => {
+    dispatch(setQuantity(id, quantity - 1));
+  };
+
+  const handleIncrease = () => {
+    if (quantity >= MAX_PER_PRODUCT) {
+      dispatch(showCartLimitMessage());
+      return;
+    }
+    dispatch(setQuantity(id, quantity + 1));
+  };
 
   return (
     <tr className="cart-item">
@@ -19,13 +35,20 @@ function CartItem({ item }) {
           <span className="cart-item__title">{title}</span>
         </div>
       </td>
-      <td className="cart-item__cell">{formatPrice(price)}</td>
+      <td className="cart-item__cell">
+        <div className="cart-item__prices">
+          {hasDiscount && (
+            <span className="cart-item__price-old">{formatPrice(price)}</span>
+          )}
+          <span>{formatPrice(discountedPrice)}</span>
+        </div>
+      </td>
       <td className="cart-item__cell">
         <div className="cart-item__quantity">
           <button
             type="button"
             className="cart-item__qty-btn"
-            onClick={() => dispatch(setQuantity(id, quantity - 1))}
+            onClick={handleDecrease}
             aria-label="Уменьшить количество"
           >
             −
@@ -34,7 +57,7 @@ function CartItem({ item }) {
           <button
             type="button"
             className="cart-item__qty-btn"
-            onClick={() => dispatch(setQuantity(id, quantity + 1))}
+            onClick={handleIncrease}
             aria-label="Увеличить количество"
           >
             +
@@ -42,7 +65,7 @@ function CartItem({ item }) {
         </div>
       </td>
       <td className="cart-item__cell cart-item__cell--total">
-        {formatPrice(price * quantity)}
+        {formatPrice(discountedPrice * quantity)}
       </td>
       <td className="cart-item__cell">
         <button

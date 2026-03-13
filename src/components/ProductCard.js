@@ -5,7 +5,11 @@ import { formatPrice } from '../const/format';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
-  const { id, title, price, image, description } = product;
+  const { id, title, price, image, description, discount } = product;
+  const hasDiscount = discount != null && discount > 0;
+  const discountedPrice = hasDiscount
+    ? Math.round(price * (1 - discount / 100))
+    : price;
 
   return (
     <article className="product-card">
@@ -20,7 +24,12 @@ function ProductCard({ product }) {
         </h3>
         <p className="product-card__description">{description}</p>
         <div className="product-card__footer">
-          <span className="product-card__price">{formatPrice(price)}</span>
+          <div className="product-card__prices">
+            {hasDiscount && (
+              <span className="product-card__price-old">{formatPrice(price)}</span>
+            )}
+            <span className="product-card__price">{formatPrice(discountedPrice)}</span>
+          </div>
           <AddCartButton
             product={product}
             className="product-card__btn"

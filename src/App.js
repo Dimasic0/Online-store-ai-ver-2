@@ -2,6 +2,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import store from './store';
 import Header from './components/Header';
+import CartLimitBanner from './components/CartLimitBanner';
 import CatalogPage from './page/CatalogPage';
 import ProductPage from './page/ProductPage';
 import CartPage from './page/CartPage';
@@ -12,6 +13,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <div className="app">
+          <CartLimitBanner />
           <Header />
           <Routes>
             <Route path="/" element={<CatalogPage />} />

@@ -17,6 +17,19 @@
   min-width: 200px;
 }
 
+.cart-item__prices {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.cart-item__price-old {
+  font-size: 0.85rem;
+  color: var(--text-muted, #666);
+  text-decoration: line-through;
+}
+
 .cart-item__cell--total {
   font-weight: 700;
   color: var(--accent, #2563eb);

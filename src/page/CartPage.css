@@ -56,6 +56,80 @@
   text-align: right;
 }
 
+/* Promo code */
+.cart__promo {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.cart__promo-form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cart__promo-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border, #e5e5e5);
+  border-radius: 8px;
+  background: var(--bg, #fff);
+  color: var(--text, #1a1a1a);
+  transition: border-color 0.2s;
+}
+
+.cart__promo-input:focus {
+  outline: none;
+  border-color: var(--accent, #2563eb);
+}
+
+.cart__promo-input:disabled {
+  background: var(--gray-100, #f5f5f5);
+  cursor: not-allowed;
+}
+
+.cart__promo-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent, #2563eb);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cart__promo-btn:hover {
+  background: var(--accent-hover, #1d4ed8);
+}
+
+.cart__promo-btn--clear {
+  background: var(--gray-500, #6b7280);
+}
+
+.cart__promo-btn--clear:hover {
+  background: var(--gray-600, #4b5563);
+}
+
+.cart__promo-message {
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+}
+
+.cart__promo-message--success {
+  color: var(--success, #16a34a);
+}
+
+.cart__promo-message--error {
+  color: var(--error, #dc2626);
+}
+
 .cart__footer {
   padding: 1.25rem;
   background: var(--card-bg, #fff);
@@ -63,10 +137,31 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.cart__total {
+.cart__total-wrap {
   margin-bottom: 1rem;
+}
+
+.cart__total-old {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-muted, #666);
+}
+
+.cart__total-old span {
+  text-decoration: line-through;
+}
+
+.cart__total {
   font-size: 1.25rem;
   color: var(--text, #1a1a1a);
+}
+
+.cart__total-wrap + .cart__actions {
+  margin-top: 0;
+}
+
+.cart__total:not(.cart__total-wrap .cart__total) {
+  margin-bottom: 1rem;
 }
 
 .cart__total strong {
