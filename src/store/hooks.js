@@ -31,7 +31,7 @@ export const useCartTotal = () =>
 export const usePromo = () =>
   useSelector((state) => state.promo);
 
-export const useCartTotalWithPromo = () =>
+export const useCartTotalPromo = () =>
   useSelector((state) => {
     const cartTotal = state.cart.reduce(
       (sum, item) =>

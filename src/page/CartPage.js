@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { clearCart } from '../store/actions/cartActions';
-import { applyPromoCode, clearPromoCode } from '../store/actions/promoActions';
-import { useCart, useCartTotal, useCartTotalWithPromo, useCartCount, usePromo, useAppDispatch } from '../store/hooks';
+import { applyPromoCode } from '../store/actions/promoActions';
+import { useCart, useCartTotal, useCartTotalPromo, useCartCount, usePromo, useAppDispatch } from '../store/hooks';
 import CartItem from '../components/CartItem';
 import { formatPrice } from '../const/format';
 import './CartPage.css';
@@ -11,22 +11,23 @@ export default function CartPage() {
   const dispatch = useAppDispatch();
   const cart = useCart();
   const cartTotal = useCartTotal();
-  const cartTotalWithPromo = useCartTotalWithPromo();
+  const cartTotalWithPromo = useCartTotalPromo();
   const cartCount = useCartCount();
   const promo = usePromo();
-  const [promoInput, setPromoInput] = useState('');
 
   const handleClearCart = () => dispatch(clearCart());
 
-  const handlePromoSubmit = useCallback((evt) => {
-    evt.preventDefault();
-    dispatch(applyPromoCode(promoInput.trim()));
-  }, [dispatch, promoInput]);
+  const handlePromoSubmit = useCallback(
+    (evt) => {
+      evt.preventDefault();
 
-  const handleClearPromo = useCallback(() => {
-    dispatch(clearPromoCode());
-    setPromoInput('');
-  }, [dispatch]);
+      const formData = new FormData(evt.currentTarget);
+      const promoValue = (formData.get('promo') || '').trim();
+
+      dispatch(applyPromoCode(promoValue));
+    },
+    []
+  );
 
   if (cart.length === 0) {
     return (
@@ -74,15 +75,10 @@ export default function CartPage() {
               type="text"
               className="cart__promo-input"
               placeholder="Введите промокод"
-              value={promoInput}
-              onChange={(evt) => setPromoInput(evt.target.value)}
+              name="promo"
               disabled={promo.isValid}
             />
-            {promo.isValid ? (
-              <button type="button" className="cart__promo-btn cart__promo-btn--clear" onClick={handleClearPromo}>
-                Удалить
-              </button>
-            ) : (
+            {promo.isValid ? null : (
               <button type="submit" className="cart__promo-btn">
                 Применить
               </button>

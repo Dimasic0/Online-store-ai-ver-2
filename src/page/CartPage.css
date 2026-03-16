@@ -72,8 +72,8 @@
 }
 
 .cart__promo-input {
-  flex: 1;
-  min-width: 200px;
+  width: 180px;
+  max-width: 100%;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 1px solid var(--border, #e5e5e5);
@@ -107,14 +107,6 @@
 
 .cart__promo-btn:hover {
   background: var(--accent-hover, #1d4ed8);
-}
-
-.cart__promo-btn--clear {
-  background: var(--gray-500, #6b7280);
-}
-
-.cart__promo-btn--clear:hover {
-  background: var(--gray-600, #4b5563);
 }
 
 .cart__promo-message {
