@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { clearCart } from '../store/actions/cartActions';
 import { applyPromoCode } from '../store/actions/promoActions';
@@ -11,6 +10,7 @@ import './CartPage.css';
 export default function CartPage() {
   const dispatch = useAppDispatch();
   const cart = useCart();
+
   const cartTotal = cart.reduce(
     (sum, item) =>
       sum + getDiscountedPrice(item.price, item.discount) * item.quantity,
@@ -21,17 +21,14 @@ export default function CartPage() {
 
   const handleClearCart = () => dispatch(clearCart());
 
-  const handlePromoSubmit = useCallback(
-    (evt) => {
+  const handlePromoSubmit = (evt) => {
       evt.preventDefault();
 
       const formData = new FormData(evt.currentTarget);
-      const promoValue = (formData.get('promo') || '').trim();
+      const promoValue = formData.get('promo').trim();
 
       dispatch(applyPromoCode(promoValue));
-    },
-    []
-  );
+    };
 
   if (cart.length === 0) {
     return (

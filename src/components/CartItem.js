@@ -8,8 +8,8 @@ import './CartItem.css';
 
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
-  const { id, title, price, image, discount } = item;
-  const quantity = useCartQuantity(id) || 0;
+  console.log("CartItem item=",item);
+  const { id, title, price, image, discount, quantity } = item;
   const discountedPrice = getDiscountedPrice(price, discount);
   const hasDiscount = discount != null && discount > 0;
 

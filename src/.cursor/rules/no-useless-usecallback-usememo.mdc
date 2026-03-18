@@ -1,0 +1,45 @@
+---
+description: Запрет лишней мемоизации useCallback/useMemo без потребителя (memo/useMemo/deps)
+globs: src/**/*.{jsx,tsx}
+alwaysApply: false
+---
+
+# React: не мемоизируй без потребителя
+
+## Правило
+
+- `useCallback` / `useMemo` **запрещены**, если результат **не используется** для:
+  - передачи в **мемоизированный компонент** (`React.memo`) как проп (часто это обработчики/колбэки), или
+  - вычисления/кеша значения, которое реально дорого и/или нужно как **стабильная ссылка** (например, участвует в `deps` другого `useMemo/useEffect/useCallback`), или
+  - стабилизации зависимостей, где без этого будет **лишний эффект/подписка** (например, `useEffect` с функцией-зависимостью).
+
+Иначе: **пиши обычную функцию/значение** без мемоизации.
+
+## Почему
+
+- `useCallback/useMemo` — это не “ускоритель по умолчанию”: они добавляют когнитивную нагрузку и усложняют `deps`.
+- Мемоизация имеет смысл только если есть **потребитель стабильной ссылки** или **реальная экономия** на дорогостоящих вычислениях.
+
+## Примеры
+
+```js
+// ❌ BAD: useCallback без потребителя стабильной ссылки
+// handlePromoSubmit не передаётся в React.memo-компонент и не участвует в deps других хуков
+const handlePromoSubmit = useCallback((evt) => {
+  evt.preventDefault();
+  // ...
+}, []);
+
+// ✅ GOOD: обычная функция
+const handlePromoSubmit = (evt) => {
+  evt.preventDefault();
+  // ...
+};
+
+// ✅ GOOD: useCallback есть смысл, если передаём в memo-компонент
+const onRemove = useCallback(() => dispatch(removeFromCart(id)), [dispatch, id]);
+return <CartItemMemo onRemove={onRemove} />;
+
+// ✅ GOOD: useMemo есть смысл, если вычисление дорогое и используется как значение
+const filtered = useMemo(() => heavyFilter(items, query), [items, query]);
+```
