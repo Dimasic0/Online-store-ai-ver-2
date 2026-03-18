@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useAppDispatch, useCartQuantity } from '../store/hooks';
+import { useAppDispatch } from '../store/hooks';
 import { removeCartItem, setQuantity } from '../store/actions/cartActions';
 import { showCartLimitMessage } from '../store/actions/notificationActions';
 import { formatPrice, getDiscountedPrice } from '../const/format';
@@ -8,7 +8,6 @@ import './CartItem.css';
 
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
-  console.log("CartItem item=",item);
   const { id, title, price, image, discount, quantity } = item;
   const discountedPrice = getDiscountedPrice(price, discount);
   const hasDiscount = discount != null && discount > 0;

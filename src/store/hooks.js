@@ -6,13 +6,6 @@ export const useCart = () =>
 export const useNotification = () =>
   useSelector((state) => state.notification);
 
-export const useCartQuantity = (id) => {
-  const item =   useSelector((state) =>
-    id == null ? null : state.cart.find((item) => item.id === id),
-  );
-  return item ? item.quantity : null;
-};
-
 export const useCartCount = () =>
   useSelector((state) =>
     state.cart.reduce((sum, item) => sum + item.quantity, 0),

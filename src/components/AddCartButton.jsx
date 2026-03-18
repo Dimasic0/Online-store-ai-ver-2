@@ -1,12 +1,12 @@
-import { memo } from 'react';
-import { useAppDispatch, useCartQuantity } from '../store/hooks';
+import { useAppDispatch, useCart } from '../store/hooks';
 import { addCart } from '../store/actions/cartActions';
 import { showCartLimitMessage } from '../store/actions/notificationActions';
 import { MAX_PER_PRODUCT } from '../const/cart';
 
 export default function AddCartButton({ product, className }) {
   const dispatch = useAppDispatch();
-  const quantity = useCartQuantity(product?.id) || 0;
+  const cart = useCart();
+  const quantity = cart.find((item) => item.id === product.id)?.quantity || 0;
 
   const handleClick = () => {
     if (quantity >= MAX_PER_PRODUCT) {
