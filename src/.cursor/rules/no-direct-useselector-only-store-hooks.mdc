@@ -1,0 +1,34 @@
+---
+description: Запрет прямого useSelector; доступ к store только через store/hooks
+globs: src/**/*.{js,jsx,ts,tsx}
+alwaysApply: false
+---
+
+# Redux: `useSelector` напрямую запрещён
+
+## Правило
+
+- В компонентах **нельзя** вызывать `useSelector` из `react-redux` напрямую.
+- Нельзя доставать данные через “обобщённый” хук с inline-селектором, например: `useAppSelector((state) => state.car)` / `useAppSelector((state) => state.cart)`.
+- Данные из Redux store можно получать **только** через **доменные** кастомные хуки вида `useCar()`, `useCart()`, `useProduct()` и т.п., которые внутри уже инкапсулируют доступ к store.
+
+## Про кастомные хуки
+
+- **Не создавай** новые доменные хуки “на один раз”, если хук будет использоваться только в одном месте и ценности инкапсуляции нет.
+- **Можно** создать доменный хук, если без него нельзя (или заметно хуже) получить данные из store: дублирование селекторов, сложная связка нескольких полей/селекторов, повторное использование в нескольких компонентах.
+
+## Пример
+
+```js
+// ✅ GOOD
+import { useCar } from '../store/hooks';
+const car = useCar();
+
+// ❌ BAD: прямой useSelector
+import { useSelector } from 'react-redux';
+const car = useSelector((state) => state.car);
+
+// ❌ BAD: inline-селектор даже через "app selector"
+import { useAppSelector } from '../store/hooks';
+const car = useAppSelector((state) => state.car);
+```

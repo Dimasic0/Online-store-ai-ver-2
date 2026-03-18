@@ -1,12 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import AddCartButton from '../components/AddCartButton';
-import { useProductById } from '../store/hooks';
+import { useProducts } from '../store/hooks';
 import { formatPrice } from '../const/format';
 import './ProductPage.css';
 
 export default function ProductPage() {
   const { id } = useParams();
-  const product = useProductById(id);
+  const product = useProducts(id);
 
   if (!product) {
     return (

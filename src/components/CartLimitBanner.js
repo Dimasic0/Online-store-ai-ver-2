@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { hideCartLimitMessage } from '../store/actions/notificationActions';
+import { useAppDispatch, useNotification } from '../store/hooks';
 import { MAX_PER_PRODUCT } from '../const/cart';
 import './CartLimitBanner.css';
 
 export default function CartLimitBanner() {
-  const dispatch = useDispatch();
-  const { cartLimitShownAt } = useSelector(
-    (state) => state.notification,
-  );
+  const dispatch = useAppDispatch();
+  const { cartLimitShownAt } = useNotification();
 
   const cartLimitVisible = cartLimitShownAt !== null;
 
