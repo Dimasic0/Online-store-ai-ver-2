@@ -1,11 +1,16 @@
 import { memo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useCartCount } from '../store/hooks';
+import { Link, NavLink } from 'react-router-dom';
+import { useCart } from '../store/hooks';
 import './Header.css';
 
+const NAV_ITEMS = [
+  { to: '/', label: 'Каталог' },
+  { to: '/cart', label: 'Корзина', isCart: true },
+];
+
 function Header() {
-  const cartCount = useCartCount();
-  const location = useLocation();
+  const cart = useCart();
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <header className="header">
@@ -14,19 +19,18 @@ function Header() {
           Магазин
         </Link>
         <nav className="header__nav">
-          <Link
-            to="/"
-            className={`header__link ${location.pathname === '/' ? 'header__link--active' : ''}`}
-          >
-            Каталог
-          </Link>
-          <Link
-            to="/cart"
-            className={`header__link header__link--cart ${location.pathname === '/cart' ? 'header__link--active' : ''}`}
-          >
-            Корзина
-            {cartCount > 0 && <span className="header__badge">{cartCount}</span>}
-          </Link>
+          {NAV_ITEMS.map(({ to, label, isCart }) => (
+            <NavLink
+              key={to}
+              to={to}
+              className={({ isActive }) =>
+                `header__link${isCart ? ' header__link--cart' : ''}${isActive ? ' header__link--active' : ''}`
+              }
+            >
+              {label}
+              {isCart && cartCount > 0 && <span className="header__badge">{cartCount}</span>}
+            </NavLink>
+          ))}
         </nav>
       </div>
     </header>

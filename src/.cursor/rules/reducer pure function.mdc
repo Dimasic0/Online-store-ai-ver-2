@@ -48,7 +48,7 @@ const initialState = {
 const notificationReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(showCartLimitMessage, (state) => {
-      state.cartLimitShownAt = (state.cartLimitShownAt ?? 0) + 1;
+      state.bannerLimita = (state.cartLimitShownAt ?? 0) + 1;
     })
     .addCase(hideCartLimitMessage, (state) => {
       state.cartLimitShownAt = null;
