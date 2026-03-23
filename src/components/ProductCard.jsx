@@ -26,9 +26,9 @@ function ProductCard({ product }) {
         <div className="product-card__footer">
           <div className="product-card__prices">
             {hasDiscount && (
-              <span className="product-card__price-old">{formatPrice(price)}</span>
+              <del className="product-card__price-old">{formatPrice(price)}</del>
             )}
-            <span className="product-card__price">{formatPrice(discountedPrice)}</span>
+            <ins className="product-card__price">{formatPrice(discountedPrice)}</ins>
           </div>
           <AddCartButton
             product={product}

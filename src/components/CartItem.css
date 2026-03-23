@@ -15,6 +15,9 @@
 
 .cart-item__cell--product {
   min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .cart-item__prices {
@@ -37,12 +40,6 @@
 
 .cart-item__cell:last-child {
   text-align: right;
-}
-
-.cart-item__product {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .cart-item__image-wrap {
@@ -121,7 +118,7 @@
     font-size: 0.9rem;
   }
 
-  .cart-item__product {
+  .cart-item__cell--product {
     gap: 0.75rem;
   }
 

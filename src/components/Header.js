@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import clsx from 'clsx';
 import { useCart } from '../store/hooks';
 import './Header.css';
 
@@ -19,18 +20,21 @@ function Header() {
           Магазин
         </Link>
         <nav className="header__nav">
-          {NAV_ITEMS.map(({ to, label, isCart }) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `header__link${isCart ? ' header__link--cart' : ''}${isActive ? ' header__link--active' : ''}`
-              }
-            >
-              {label}
-              {isCart && cartCount > 0 && <span className="header__badge">{cartCount}</span>}
-            </NavLink>
-          ))}
+          <ul className="header__list">
+            {NAV_ITEMS.map(({ to, label, isCart }) => (
+              <li key={to} className="header__item">
+                <NavLink
+                  to={to}
+                  className={({ isActive }) =>
+                    clsx('header__link', {'header__link--cart': isCart, 'header__link--active': isActive})
+                  }
+                >
+                  {label}
+                  {isCart && cartCount > 0 && <span className="header__badge">{cartCount}</span>}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
     </header>

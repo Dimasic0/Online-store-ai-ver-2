@@ -7,7 +7,7 @@ export default function CatalogPage() {
 
   return (
     <main className="catalog">
-      <div className="catalog__inner">
+      <section className="catalog__inner">
         <h1 className="catalog__title">Каталог товаров</h1>
         <ul className="catalog__grid">
           {products.map((product) => (
@@ -16,7 +16,7 @@ export default function CatalogPage() {
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     </main>
   );
 }

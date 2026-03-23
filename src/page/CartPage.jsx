@@ -33,27 +33,27 @@ export default function CartPage() {
   if (cart.length === 0) {
     return (
       <main className="cart cart--empty">
-        <div className="cart__inner">
+        <header className="cart__inner">
           <h1 className="cart__title">Корзина</h1>
           <p className="cart__empty-text">В корзине пока ничего нет.</p>
           <Link to="/" className="cart__link">
             Перейти в каталог
           </Link>
-        </div>
+        </header>
       </main>
     );
   }
 
   return (
     <main className="cart">
-      <div className="cart__inner">
-        <div className="cart__header">
+      <section className="cart__inner">
+        <header className="cart__header">
           <h1 className="cart__title">Корзина</h1>
           <span className="cart__count">{cart.length} товар(ов)</span>
-        </div>
-        <div className="cart__table-wrap">
+        </header>
+        <section className="cart__table-wrap">
           <table className="cart__table">
-            <thead>
+            <thead className="cart__thead">
               <tr>
                 <th>Товар</th>
                 <th>Цена</th>
@@ -68,9 +68,9 @@ export default function CartPage() {
               ))}
             </tbody>
           </table>
-        </div>
+        </section>
 
-        <div className="cart__promo">
+        <section className="cart__promo">
           <form className="cart__promo-form" onSubmit={handlePromoSubmit}>
             <input
               type="text"
@@ -79,7 +79,7 @@ export default function CartPage() {
               name="promo"
               disabled={isValid}
             />
-            {isValid ? null : (
+            {!isValid  &&  (
               <button type="submit" className="cart__promo-btn">
                 Применить
               </button>
@@ -92,9 +92,9 @@ export default function CartPage() {
                 : `Промокод "${code}" недействителен`}
             </p>
           )}
-        </div>
+        </section>
 
-        <div className="cart__footer">
+        <section className="cart__footer">
           {isValid ? (
             <div className="cart__total-wrap">
               <div className="cart__total-old">
@@ -113,8 +113,8 @@ export default function CartPage() {
               Оформить заказ
             </button>
           </div>
-        </div>
-      </div>
+        </section>
+      </section>
     </main>
   );
 }

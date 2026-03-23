@@ -26,20 +26,20 @@ function CartItem({ item }) {
 
   return (
     <tr className="cart-item">
-      <td className="cart-item__cell cart-item__cell--product">
-        <div className="cart-item__product">
+      <th className="cart-item__cell cart-item__cell--product">
           <div className="cart-item__image-wrap">
             <img className="cart-item__image" src={image} alt={title} />
           </div>
           <span className="cart-item__title">{title}</span>
-        </div>
-      </td>
+      </th>
       <td className="cart-item__cell">
         <div className="cart-item__prices">
           {hasDiscount && (
-            <span className="cart-item__price-old">{formatPrice(price)}</span>
+            <del className="cart-item__price-old">{formatPrice(price)}</del>
           )}
-          <span>{formatPrice(discountedPrice)}</span>
+          <strong className="cart-item__price-current">
+            {formatPrice(discountedPrice)}
+          </strong>
         </div>
       </td>
       <td className="cart-item__cell">
