@@ -5,12 +5,12 @@ import { showCartLimitMessage } from '../store/actions/notificationActions';
 import { formatPrice, getDiscountedPrice } from '../const/format';
 import { MAX_PER_PRODUCT } from '../const/cart';
 import './CartItem.css';
+import ProductPrices from './ProductPrices';
 
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
   const { id, title, price, image, discount, quantity } = item;
   const discountedPrice = getDiscountedPrice(price, discount);
-  const hasDiscount = discount != null && discount > 0;
 
   const handleDecrease = () => {
     dispatch(setQuantity(id, quantity - 1));
@@ -33,14 +33,7 @@ function CartItem({ item }) {
           <span className="cart-item__title">{title}</span>
       </th>
       <td className="cart-item__cell">
-        <div className="cart-item__prices">
-          {hasDiscount && (
-            <del className="cart-item__price-old">{formatPrice(price)}</del>
-          )}
-          <strong className="cart-item__price-current">
-            {formatPrice(discountedPrice)}
-          </strong>
-        </div>
+        <ProductPrices be="cart-item__" product={item} />
       </td>
       <td className="cart-item__cell">
         <div className="cart-item__quantity">

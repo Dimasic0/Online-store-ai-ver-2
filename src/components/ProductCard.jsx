@@ -1,15 +1,11 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
-import { formatPrice } from '../const/format';
+import ProductPrices from './ProductPrices';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
-  const { id, title, price, image, description, discount } = product;
-  const hasDiscount = discount != null && discount > 0;
-  const discountedPrice = hasDiscount
-    ? Math.round(price * (1 - discount / 100))
-    : price;
+  const { id, title, image, description } = product;
 
   return (
     <article className="product-card">
@@ -24,12 +20,7 @@ function ProductCard({ product }) {
         </h3>
         <p className="product-card__description">{description}</p>
         <div className="product-card__footer">
-          <div className="product-card__prices">
-            {hasDiscount && (
-              <del className="product-card__price-old">{formatPrice(price)}</del>
-            )}
-            <ins className="product-card__price">{formatPrice(discountedPrice)}</ins>
-          </div>
+          <ProductPrices be="product-card" product={product} />
           <AddCartButton
             product={product}
             className="product-card__btn"

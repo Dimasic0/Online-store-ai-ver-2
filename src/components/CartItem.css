@@ -38,6 +38,10 @@
   color: var(--accent, #2563eb);
 }
 
+.cart-item__price {
+  text-decoration: none;
+}
+
 .cart-item__cell:last-child {
   text-align: right;
 }
