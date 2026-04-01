@@ -27,13 +27,11 @@ function CartItem({ item }) {
   return (
     <tr className="cart-item">
       <th className="cart-item__cell cart-item__cell--product">
-          <div className="cart-item__image-wrap">
-            <img className="cart-item__image" src={image} alt={title} />
-          </div>
-          <span className="cart-item__title">{title}</span>
+        <img className="cart-item__image" src={image} alt={title} />
+        <span className="cart-item__title">{title}</span>
       </th>
       <td className="cart-item__cell">
-        <ProductPrices be="cart-item__" product={item} />
+        <ProductPrices be="cart-item" product={item} />
       </td>
       <td className="cart-item__cell">
         <div className="cart-item__quantity">
