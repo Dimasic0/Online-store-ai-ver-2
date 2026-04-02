@@ -5,7 +5,7 @@ import { showCartLimitMessage } from '../store/actions/notificationActions';
 import { formatPrice, getDiscountedPrice } from '../const/format';
 import { MAX_PER_PRODUCT } from '../const/cart';
 import './CartItem.css';
-import ProductPrices from './ProductPrices';
+import Prices from './Prices';
 
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ function CartItem({ item }) {
         <span className="cart-item__title">{title}</span>
       </th>
       <td className="cart-item__cell">
-        <ProductPrices be="cart-item" product={item} />
+        <Prices be="cart-item__prices" product={item} />
       </td>
       <td className="cart-item__cell">
         <div className="cart-item__quantity">

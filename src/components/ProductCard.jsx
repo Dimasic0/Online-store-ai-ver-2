@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
-import ProductPrices from './ProductPrices';
+import Prices from './Prices';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
@@ -21,7 +21,7 @@ function ProductCard({ product }) {
         </h3>
         <p className="product-card__description">{description}</p>
         <div className="product-card__footer">
-          <ProductPrices be="product-card" product={product} />
+          <Prices be="product-card__prices" product={product} />
           <AddCartButton
             product={product}
             className="product-card__btn" 

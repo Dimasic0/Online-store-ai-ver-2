@@ -1,0 +1,15 @@
+.prices {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.prices__price-old {
+    color: var(--text-muted, #666);
+    text-decoration: line-through;
+}
+
+.prices__price {
+    text-decoration: none;
+}
