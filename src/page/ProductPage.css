@@ -88,7 +88,7 @@
 }
 
 /* Not found */
-.product-page--not-found .product-page__inner {
+.product-page--not-found .page__inner {
   text-align: center;
   padding-top: 3rem;
 }

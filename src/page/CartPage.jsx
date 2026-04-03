@@ -32,8 +32,8 @@ export default function CartPage() {
 
   if (cart.length === 0) {
     return (
-      <main className="cart cart--empty page">
-        <header className="cart__inner page__inner">
+      <main className="page cart cart--empty">
+        <header className="page__inner">
           <h1 className="cart__title">Корзина</h1>
           <p className="cart__empty-text">В корзине пока ничего нет.</p>
           <Link to="/" className="cart__link">
@@ -46,12 +46,12 @@ export default function CartPage() {
 
   return (
     <main className="cart page">
-      <section className="cart__inner page__inner">
+      <section className="page__inner">
         <header className="cart__header">
           <h1 className="cart__title">Корзина</h1>
           <span className="cart__count">{cart.length} товар(ов)</span>
         </header>
-        <section className="cart__table-wrap">
+        <section className="cart__table-wrap surface">
           <table className="cart__table">
             <thead className="cart__thead">
               <tr>
@@ -70,7 +70,7 @@ export default function CartPage() {
           </table>
         </section>
 
-        <section className="cart__promo">
+        <section className="cart__promo surface">
           <form className="cart__promo-form" onSubmit={handlePromoSubmit}>
             <input
               type="text"
@@ -94,7 +94,7 @@ export default function CartPage() {
           )}
         </section>
 
-        <section className="cart__footer">
+        <section className="cart__footer surface">
           {isValid ? (
             <div className="cart__total-wrap">
               <div className="cart__total-old">

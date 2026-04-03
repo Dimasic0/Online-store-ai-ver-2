@@ -10,8 +10,8 @@ export default function ProductPage() {
 
   if (!product) {
     return (
-      <main className="product-page product-page--not-found page">
-        <div className="product-page__inner page__inner">
+      <main className="page product-page product-page--not-found">
+        <div className="page__inner">
           <h1>Товар не найден</h1>
           <Link to="/" className="product-page__back">
             Вернуться в каталог
@@ -24,8 +24,8 @@ export default function ProductPage() {
   const { title, price, image, description } = product;
 
   return (
-    <main className="product-page page">
-      <div className="product-page__inner page__inner">
+    <main className="page product-page">
+      <div className="page__inner">
         <Link to="/" className="product-page__breadcrumb">
           ← Каталог
         </Link>

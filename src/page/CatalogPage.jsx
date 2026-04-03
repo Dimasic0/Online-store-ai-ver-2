@@ -6,8 +6,8 @@ export default function CatalogPage() {
   const products = useProducts();
 
   return (
-    <main className="catalog page">
-      <section className="catalog__inner page__inner">
+    <main className="page catalog">
+      <section className="page__inner">
         <h1 className="catalog__title">Каталог товаров</h1>
         <ul className="catalog__grid">
           {products.map((product) => (

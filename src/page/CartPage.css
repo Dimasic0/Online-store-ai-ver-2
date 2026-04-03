@@ -23,9 +23,6 @@
 
 .cart__table-wrap {
   margin-bottom: 1.5rem;
-  background: var(--card-bg, #fff);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
@@ -54,9 +51,6 @@
 .cart__promo {
   margin-bottom: 1.5rem;
   padding: 1.25rem;
-  background: var(--card-bg, #fff);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .cart__promo-form {
@@ -118,9 +112,6 @@
 
 .cart__footer {
   padding: 1.25rem;
-  background: var(--card-bg, #fff);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .cart__total-wrap {
@@ -191,7 +182,7 @@
 }
 
 /* Empty state */
-.cart--empty .cart__inner {
+.cart--empty .page__inner {
   text-align: center;
   padding-top: 3rem;
 }
