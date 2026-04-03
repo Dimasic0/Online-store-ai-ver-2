@@ -1,11 +1,5 @@
 .cart {
-  padding: 2rem 1.5rem;
-  min-height: calc(100vh - 60px);
-}
-
-.cart__inner {
-  max-width: 960px;
-  margin: 0 auto;
+  --page-max: 960px;
 }
 
 .cart__header {

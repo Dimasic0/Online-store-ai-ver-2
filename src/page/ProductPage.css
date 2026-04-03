@@ -1,11 +1,5 @@
 .product-page {
-  padding: 2rem 1.5rem;
-  min-height: calc(100vh - 60px);
-}
-
-.product-page__inner {
-  max-width: 900px;
-  margin: 0 auto;
+  --page-max: 900px;
 }
 
 .product-page__breadcrumb {

@@ -1,11 +1,5 @@
 .catalog {
-  padding: 2rem 1.5rem;
-  min-height: calc(100vh - 60px);
-}
-
-.catalog__inner {
-  max-width: 1200px;
-  margin: 0 auto;
+  --page-max: 1200px;
 }
 
 .catalog__title {

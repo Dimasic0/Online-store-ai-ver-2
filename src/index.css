@@ -18,6 +18,16 @@
   box-sizing: border-box;
 }
 
+.page {
+  padding: 2rem 1.5rem;
+  min-height: calc(100vh - 60px);
+}
+
+.page__inner {
+  max-width: var(--page-max);
+  margin-inline: auto;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
