@@ -38,7 +38,7 @@ export default function ProductPage() {
             />
           </div>
           <div className="product-page__info">
-            <h1 className="product-page__title">{title}</h1>
+            <h1 className="product-page__title page__title">{title}</h1>
             <p className="product-page__description">{description}</p>
             <p className="product-page__price">{formatPrice(price)}</p>
             <AddCartButton product={product} className="product-page__btn" />

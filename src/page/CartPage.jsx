@@ -34,7 +34,7 @@ export default function CartPage() {
     return (
       <main className="page cart cart--empty">
         <header className="page__inner">
-          <h1 className="cart__title">Корзина</h1>
+          <h1 className="page__title">Корзина</h1>
           <p className="cart__empty-text">В корзине пока ничего нет.</p>
           <Link to="/" className="cart__link">
             Перейти в каталог
@@ -48,7 +48,7 @@ export default function CartPage() {
     <main className="cart page">
       <section className="page__inner">
         <header className="cart__header">
-          <h1 className="cart__title">Корзина</h1>
+          <h1 className="page__title">Корзина</h1>
           <span className="cart__count">{cart.length} товар(ов)</span>
         </header>
         <section className="cart__table-wrap surface">

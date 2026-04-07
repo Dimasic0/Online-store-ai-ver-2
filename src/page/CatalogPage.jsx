@@ -8,7 +8,7 @@ export default function CatalogPage() {
   return (
     <main className="page catalog">
       <section className="page__inner">
-        <h1 className="catalog__title">Каталог товаров</h1>
+        <h1 className="page__title">Каталог товаров</h1>
         <ul className="catalog__grid">
           {products.map((product) => (
             <li key={product.id}>

@@ -28,6 +28,13 @@
   margin-inline: auto;
 }
 
+.page__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
 .surface {
   background: var(--card-bg, #fff);
   border-radius: 12px;
