@@ -66,6 +66,18 @@
   gap: 0.75rem;
 }
 
+.product-card__price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.product-card__old-price {
+  font-size: 0.85rem;
+  color: var(--text-muted, #666);
+  text-decoration: line-through;
+}
+
 .product-card__price {
   font-size: 1.25rem;
   font-weight: 700;

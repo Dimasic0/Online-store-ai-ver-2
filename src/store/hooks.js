@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { getDiscountedPrice } from '../const/format';
 
 export const useCart = () =>
   useSelector((state) => state.cart);
@@ -20,7 +21,10 @@ export const useCartCount = () =>
 
 export const useCartTotal = () =>
   useSelector((state) =>
-    state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    state.cart.reduce(
+      (sum, item) => sum + getDiscountedPrice(item.price, item.discount) * item.quantity,
+      0,
+    ),
   );
 
 export const useProducts = () =>

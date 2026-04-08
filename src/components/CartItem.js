@@ -1,13 +1,14 @@
 import { memo } from 'react';
 import { useAppDispatch, useCartQuantity } from '../store/hooks';
 import { removeCartItem, setQuantity } from '../store/actions/cartActions';
-import { formatPrice } from '../const/format';
+import { formatPrice, getDiscountedPrice } from '../const/format';
 import './CartItem.css';
 
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
-  const { id, title, price, image } = item;
+  const { id, title, price, discount = 0, image } = item;
   const quantity = useCartQuantity(id) || 0;
+  const discountedPrice = getDiscountedPrice(price, discount);
 
   return (
     <tr className="cart-item">
@@ -19,7 +20,12 @@ function CartItem({ item }) {
           <span className="cart-item__title">{title}</span>
         </div>
       </td>
-      <td className="cart-item__cell">{formatPrice(price)}</td>
+      <td className="cart-item__cell">
+        <div className="cart-item__price-wrap">
+          {discount > 0 && <span className="cart-item__old-price">{formatPrice(price)}</span>}
+          <span>{formatPrice(discountedPrice)}</span>
+        </div>
+      </td>
       <td className="cart-item__cell">
         <div className="cart-item__quantity">
           <button
@@ -42,7 +48,7 @@ function CartItem({ item }) {
         </div>
       </td>
       <td className="cart-item__cell cart-item__cell--total">
-        {formatPrice(price * quantity)}
+        {formatPrice(discountedPrice * quantity)}
       </td>
       <td className="cart-item__cell">
         <button

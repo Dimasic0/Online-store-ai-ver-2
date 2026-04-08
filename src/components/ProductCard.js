@@ -1,11 +1,12 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
-import { formatPrice } from '../const/format';
+import { formatPrice, getDiscountedPrice } from '../const/format';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
-  const { id, title, price, image, description } = product;
+  const { id, title, price, discount = 0, image, description } = product;
+  const discountedPrice = getDiscountedPrice(price, discount);
 
   return (
     <article className="product-card">
@@ -20,7 +21,10 @@ function ProductCard({ product }) {
         </h3>
         <p className="product-card__description">{description}</p>
         <div className="product-card__footer">
-          <span className="product-card__price">{formatPrice(price)}</span>
+          <div className="product-card__price-wrap">
+            {discount > 0 && <span className="product-card__old-price">{formatPrice(price)}</span>}
+            <span className="product-card__price">{formatPrice(discountedPrice)}</span>
+          </div>
           <AddCartButton
             product={product}
             className="product-card__btn"

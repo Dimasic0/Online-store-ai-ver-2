@@ -22,6 +22,18 @@
   color: var(--accent, #2563eb);
 }
 
+.cart-item__price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cart-item__old-price {
+  font-size: 0.8rem;
+  color: var(--text-muted, #666);
+  text-decoration: line-through;
+}
+
 .cart-item__cell:last-child {
   text-align: right;
 }
