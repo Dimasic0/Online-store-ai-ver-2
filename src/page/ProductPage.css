@@ -93,6 +93,16 @@
   transform: scale(0.98);
 }
 
+.product-page__btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.product-page__btn:disabled:hover {
+  background: #94a3b8;
+}
+
 /* Not found */
 .product-page--not-found .product-page__inner {
   text-align: center;

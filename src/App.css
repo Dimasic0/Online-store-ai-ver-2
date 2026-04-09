@@ -8,3 +8,20 @@
 .app > main {
   flex-grow: 1;
 }
+
+.app-notification {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 0.85rem 1.25rem;
+  max-width: min(92vw, 520px);
+  border-radius: 10px;
+  background: rgba(17, 24, 39, 0.95);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+}

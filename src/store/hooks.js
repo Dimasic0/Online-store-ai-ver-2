@@ -37,3 +37,6 @@ export const useProductById = (id) =>
 
 export const useAppDispatch = () => useDispatch();
 
+export const useNotification = () =>
+  useSelector((state) => state.notification);
+

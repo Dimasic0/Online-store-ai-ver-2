@@ -1,7 +1,9 @@
 import { memo } from 'react';
 import { useAppDispatch, useCartQuantity } from '../store/hooks';
 import { removeCartItem, setQuantity } from '../store/actions/cartActions';
+import { showNotification } from '../store/actions/notificationActions';
 import { formatPrice, getDiscountedPrice } from '../const/format';
+import { CART_LIMIT_MESSAGE, MAX_PRODUCT_QUANTITY } from '../const/cart';
 import './CartItem.css';
 
 function CartItem({ item }) {
@@ -9,6 +11,15 @@ function CartItem({ item }) {
   const { id, title, price, discount = 0, image } = item;
   const quantity = useCartQuantity(id) || 0;
   const discountedPrice = getDiscountedPrice(price, discount);
+  const isLimitReached = quantity >= MAX_PRODUCT_QUANTITY;
+
+  const handleIncrease = () => {
+    if (isLimitReached) {
+      dispatch(showNotification(CART_LIMIT_MESSAGE));
+      return;
+    }
+    dispatch(setQuantity(id, quantity + 1));
+  };
 
   return (
     <tr className="cart-item">
@@ -40,7 +51,7 @@ function CartItem({ item }) {
           <button
             type="button"
             className="cart-item__qty-btn"
-            onClick={() => dispatch(setQuantity(id, quantity + 1))}
+            onClick={handleIncrease}
             aria-label="Увеличить количество"
           >
             +

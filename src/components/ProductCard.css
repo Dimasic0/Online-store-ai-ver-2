@@ -104,3 +104,13 @@
 .product-card__btn:active {
   transform: scale(0.98);
 }
+
+.product-card__btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.product-card__btn:disabled:hover {
+  background: #94a3b8;
+}
