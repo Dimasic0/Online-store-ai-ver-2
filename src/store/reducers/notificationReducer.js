@@ -1,21 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { hideNotification, showNotification } from '../actions/notificationActions';
 
-const initialState = {
-  message: '',
-  visible: false,
-};
-
-const notificationReducer = createReducer(initialState, (builder) => {
+/**
+ * Редьюсер флага показа уведомления о лимите товара.
+ */
+const notificationReducer = createReducer(false, (builder) => {
   builder
-    .addCase(showNotification, (state, action) => {
-      state.message = action.payload;
-      state.visible = true;
-    })
-    .addCase(hideNotification, (state) => {
-      state.visible = false;
-      state.message = '';
-    });
+    .addCase(showNotification, () => true)
+    .addCase(hideNotification, () => false);
 });
 
 export default notificationReducer;

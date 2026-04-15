@@ -3,6 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { useCartCount } from '../store/hooks';
 import './Header.css';
 
+/**
+ * Верхняя панель навигации приложения.
+ * Отображает ссылки на каталог, корзину и счетчик товаров.
+ */
 function Header() {
   const cartCount = useCartCount();
   const location = useLocation();

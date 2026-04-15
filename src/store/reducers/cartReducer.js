@@ -4,6 +4,9 @@ import { MAX_PRODUCT_QUANTITY } from '../../const/cart';
 
 const initialState = [];
 
+/**
+ * Редьюсер корзины: добавление, удаление, изменение количества и очистка.
+ */
 const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addCart, (state, action) => {

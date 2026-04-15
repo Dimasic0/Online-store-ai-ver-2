@@ -1,0 +1,25 @@
+---
+description: Классы в разметке должны соответствовать классическому БЭМ
+globs: src/**/*.{html,js,jsx,ts,tsx}
+alwaysApply: false
+---
+
+# Классический БЭМ для class/className
+
+- Именуй классы строго по классическому БЭМ: `block`, `block__element`, `block--modifier`.
+- Используй только нижний регистр и дефис для слов: `product-card`, `product-card__title`, `product-card--featured`.
+- Не используй элементы без блока: `__title` без `block` запрещен.
+- Не используй модификаторы без базового класса блока или элемента в том же узле.
+- Не добавляй цепочки вроде `block__el1__el2`; вложенность выражай через отдельные блоки или элементы.
+
+## Примеры
+
+```html
+<!-- ❌ Плохо -->
+<div class="ProductCard productCard_title active"></div>
+
+<!-- ✅ Хорошо -->
+<div class="product-card product-card--active">
+  <h2 class="product-card__title"></h2>
+</div>
+```

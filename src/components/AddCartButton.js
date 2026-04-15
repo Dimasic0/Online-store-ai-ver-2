@@ -4,14 +4,24 @@ import { addCart } from '../store/actions/cartActions';
 import { showNotification } from '../store/actions/notificationActions';
 import { CART_LIMIT_MESSAGE, MAX_PRODUCT_QUANTITY } from '../const/cart';
 
+/**
+ * Кнопка добавления товара в корзину с учетом лимита количества.
+ * @param {Object} props
+ * @param {Object} props.product - Товар для добавления.
+ * @param {string} props.className - CSS-класс кнопки.
+ * @returns {JSX.Element}
+ */
 function AddCartButton({ product, className }) {
   const dispatch = useAppDispatch();
   const quantity = useCartQuantity(product?.id) || 0;
   const isLimitReached = quantity >= MAX_PRODUCT_QUANTITY;
 
+  /**
+   * Обрабатывает клик по кнопке: добавляет товар или показывает уведомление о лимите.
+   */
   const handleClick = () => {
     if (quantity >= MAX_PRODUCT_QUANTITY) {
-      dispatch(showNotification(CART_LIMIT_MESSAGE));
+      dispatch(showNotification());
       return;
     }
     dispatch(addCart(product));

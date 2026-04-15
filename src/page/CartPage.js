@@ -5,12 +5,20 @@ import CartItem from '../components/CartItem';
 import { formatPrice } from '../const/format';
 import './CartPage.css';
 
+/**
+ * Страница корзины.
+ * Показывает товары, итоговую стоимость и действия с корзиной.
+ * @returns {JSX.Element}
+ */
 export default function CartPage() {
   const dispatch = useAppDispatch();
   const cart = useCart();
   const cartTotal = useCartTotal();
   const cartCount = useCartCount();
 
+  /**
+   * Полностью очищает корзину.
+   */
   const handleClearCart = () => dispatch(clearCart());
 
   if (cart.length === 0) {
@@ -42,7 +50,7 @@ export default function CartPage() {
                 <th>Цена</th>
                 <th>Количество</th>
                 <th>Сумма</th>
-                <th></th>
+                <th scope="col">Действия</th>
               </tr>
             </thead>
             <tbody>

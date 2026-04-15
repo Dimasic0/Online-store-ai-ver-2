@@ -4,6 +4,12 @@ import AddCartButton from './AddCartButton';
 import { formatPrice, getDiscountedPrice } from '../const/format';
 import './ProductCard.css';
 
+/**
+ * Карточка товара в списке каталога.
+ * @param {Object} props
+ * @param {Object} props.product - Данные товара.
+ * @returns {JSX.Element}
+ */
 function ProductCard({ product }) {
   const { id, title, price, discount = 0, image, description } = product;
   const discountedPrice = getDiscountedPrice(price, discount);
@@ -14,11 +20,11 @@ function ProductCard({ product }) {
         <img className="product-card__image" src={image} alt={title} />
       </Link>
       <div className="product-card__body">
-        <h3 className="product-card__title">
+        <h2 className="product-card__title">
           <Link to={`/product/${id}`} className="product-card__title-link">
             {title}
           </Link>
-        </h3>
+        </h2>
         <p className="product-card__description">{description}</p>
         <div className="product-card__footer">
           <div className="product-card__price-wrap">

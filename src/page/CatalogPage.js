@@ -2,6 +2,11 @@ import { useProducts } from '../store/hooks';
 import ProductCard from '../components/ProductCard';
 import './CatalogPage.css';
 
+/**
+ * Страница каталога товаров.
+ * Отображает список всех доступных товаров.
+ * @returns {JSX.Element}
+ */
 export default function CatalogPage() {
   const products = useProducts();
 

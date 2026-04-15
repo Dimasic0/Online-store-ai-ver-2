@@ -4,6 +4,11 @@ import { useProductById } from '../store/hooks';
 import { formatPrice } from '../const/format';
 import './ProductPage.css';
 
+/**
+ * Страница детального просмотра товара.
+ * Получает товар по id из URL и показывает его карточку.
+ * @returns {JSX.Element}
+ */
 export default function ProductPage() {
   const { id } = useParams();
   const product = useProductById(id);

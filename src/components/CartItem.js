@@ -6,6 +6,12 @@ import { formatPrice, getDiscountedPrice } from '../const/format';
 import { CART_LIMIT_MESSAGE, MAX_PRODUCT_QUANTITY } from '../const/cart';
 import './CartItem.css';
 
+/**
+ * Строка товара в таблице корзины.
+ * @param {Object} props
+ * @param {Object} props.item - Товар из корзины.
+ * @returns {JSX.Element}
+ */
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
   const { id, title, price, discount = 0, image } = item;
@@ -13,9 +19,12 @@ function CartItem({ item }) {
   const discountedPrice = getDiscountedPrice(price, discount);
   const isLimitReached = quantity >= MAX_PRODUCT_QUANTITY;
 
+  /**
+   * Увеличивает количество товара в корзине с проверкой лимита.
+   */
   const handleIncrease = () => {
     if (isLimitReached) {
-      dispatch(showNotification(CART_LIMIT_MESSAGE));
+      dispatch(showNotification());
       return;
     }
     dispatch(setQuantity(id, quantity + 1));
