@@ -1,3 +1,11 @@
+# Online Store (AI ver 2)
+
+Небольшой SPA‑магазин на React: каталог, страница товара и корзина (Redux Toolkit).
+
+- **SSD (System/Software Specification & Design)**: `docs/SSD.md`
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
