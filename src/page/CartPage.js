@@ -1,10 +1,25 @@
 import { Link } from 'react-router-dom';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { clearCart } from '../store/actions/cartActions';
 import { useCart, useCartTotal, useCartCount, useAppDispatch } from '../store/hooks';
 import CartItem from '../components/CartItem';
 import { formatPrice } from '../const/format';
 import './CartPage.css';
+
+const PROMO_CODE = 'SALE10';
+const PROMO_DISCOUNT = 10;
+const PROMO_INPUT_PLACEHOLDER = 'Введите промокод';
+const PROMO_EMPTY_ERROR = 'Введите промокод.';
+const PROMO_NOT_FOUND_ERROR = 'Промокод не найден.';
+const PROMO_SUCCESS_MESSAGE = `Промокод применён: скидка ${PROMO_DISCOUNT}%.`;
+
+const getNormalizedPromoCode = (promoCode) => promoCode.trim().toUpperCase();
+
+const getPromoErrorMessage = (normalizedPromoCode) => {
+  if (!normalizedPromoCode) return PROMO_EMPTY_ERROR;
+  if (normalizedPromoCode !== PROMO_CODE) return PROMO_NOT_FOUND_ERROR;
+  return '';
+};
 
 /**
  * Страница корзины.
@@ -12,47 +27,28 @@ import './CartPage.css';
  * @returns {JSX.Element}
  */
 export default function CartPage() {
-  const PROMO_CODE = 'SALE10';
-  const PROMO_DISCOUNT = 10;
   const dispatch = useAppDispatch();
   const cart = useCart();
   const cartTotal = useCartTotal();
   const cartCount = useCartCount();
-  const [promoInput, setPromoInput] = useState('');
-  const [promoApplied, setPromoApplied] = useState(false);
-  const [promoError, setPromoError] = useState('');
+  const [promoStatus, setPromoStatus] = useState('');
 
-  const discountAmount = useMemo(() => {
-    if (!promoApplied) return 0;
-    return cartTotal * (PROMO_DISCOUNT / 100);
-  }, [cartTotal, promoApplied]);
+  const hasPromoDiscount = promoStatus === PROMO_SUCCESS_MESSAGE;
+  const discountAmount = hasPromoDiscount ? cartTotal * (PROMO_DISCOUNT / 100) : 0;
+  const totalAfterDiscount = cartTotal - discountAmount;
 
-  const totalAfterDiscount = useMemo(() => cartTotal - discountAmount, [cartTotal, discountAmount]);
-
-  /**
-   * Полностью очищает корзину.
-   */
   const handleClearCart = () => {
-    setPromoInput('');
-    setPromoApplied(false);
-    setPromoError('');
+    setPromoStatus('');
     dispatch(clearCart());
   };
 
-  const handleApplyPromo = () => {
-    const normalizedPromo = promoInput.trim().toUpperCase();
-    if (!normalizedPromo) {
-      setPromoApplied(false);
-      setPromoError('Введите промокод.');
-      return;
-    }
-    if (normalizedPromo !== PROMO_CODE) {
-      setPromoApplied(false);
-      setPromoError('Промокод не найден.');
-      return;
-    }
-    setPromoApplied(true);
-    setPromoError('');
+  const handleApplyPromo = (evt) => {
+    evt.preventDefault();
+    const promoCode = evt.target.elements['promo-code-input'].value;
+    const normalizedPromoCode = getNormalizedPromoCode(promoCode);
+    const promoErrorMessage = getPromoErrorMessage(normalizedPromoCode);
+
+    setPromoStatus(promoErrorMessage || PROMO_SUCCESS_MESSAGE);
   };
 
   if (cart.length === 0) {
@@ -99,23 +95,25 @@ export default function CartPage() {
             <label className="cart__promo-label" htmlFor="promo-code-input">
               Промокод
             </label>
-            <div className="cart__promo-controls">
+            <form className="cart__promo-controls" onSubmit={handleApplyPromo}>
               <input
                 id="promo-code-input"
+                name="promo-code-input"
                 className="cart__promo-input"
                 type="text"
-                value={promoInput}
-                onChange={(event) => setPromoInput(event.target.value)}
-                placeholder="Введите промокод"
+                placeholder={PROMO_INPUT_PLACEHOLDER}
               />
-              <button type="button" className="cart__btn cart__btn--secondary" onClick={handleApplyPromo}>
+              <button type="submit" className="cart__btn cart__btn--secondary">
                 Применить
               </button>
-            </div>
-            {promoError ? <p className="cart__promo-message cart__promo-message--error">{promoError}</p> : null}
-            {promoApplied ? (
-              <p className="cart__promo-message cart__promo-message--success">
-                Промокод применён: скидка {PROMO_DISCOUNT}%.
+            </form>
+            {promoStatus ? (
+              <p
+                className={`cart__promo-message ${
+                  hasPromoDiscount ? 'cart__promo-message--success' : 'cart__promo-message--error'
+                }`}
+              >
+                {promoStatus}
               </p>
             ) : null}
           </div>
@@ -124,7 +122,7 @@ export default function CartPage() {
           </div>
           <div className="cart__total">
             Сумма после скидки:{' '}
-            <strong>{formatPrice(promoApplied ? totalAfterDiscount : cartTotal)}</strong>
+            <strong>{formatPrice(totalAfterDiscount)}</strong>
           </div>
           <div className="cart__actions">
             <button type="button" className="cart__btn cart__btn--secondary" onClick={handleClearCart}>
