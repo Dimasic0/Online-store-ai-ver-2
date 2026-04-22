@@ -8,6 +8,9 @@ import { getDiscountedPrice } from '../const/format';
 export const useCart = () =>
   useSelector((state) => state.cart);
 
+const useCartReducer = (callback, defaultValue = 0) =>
+  useSelector((state) => state.cart.reduce(callback, defaultValue));
+
 /**
  * Возвращает товар из корзины по идентификатору.
  * @param {string|number} id - Идентификатор товара.
@@ -33,21 +36,16 @@ export const useCartQuantity = (id) => {
  * @returns {number}
  */
 export const useCartCount = () =>
-  useSelector((state) =>
-    state.cart.reduce((sum, item) => sum + item.quantity, 0),
-  );
+  useCartReducer((sum, item) => sum + item.quantity, 0);
 
 /**
  * Возвращает итоговую стоимость корзины с учетом скидок.
  * @returns {number}
  */
 export const useCartTotal = () =>
-  useSelector((state) =>
-    state.cart.reduce(
+  useCartReducer(
       (sum, item) => sum + getDiscountedPrice(item.price, item.discount) * item.quantity,
-      0,
-    ),
-  );
+      0)
 
 /**
  * Возвращает список всех товаров каталога.

@@ -109,8 +109,8 @@ export default function CartPage() {
             </form>
             {promoStatus ? (
               <p
-                className={`cart__promo-message ${
-                  hasPromoDiscount ? 'cart__promo-message--success' : 'cart__promo-message--error'
+                className={`cart__promo-message cart__promo-message--${
+                  hasPromoDiscount ? 'success' : 'error'
                 }`}
               >
                 {promoStatus}
