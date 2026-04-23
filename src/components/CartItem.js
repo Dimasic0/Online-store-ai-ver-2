@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import { useAppDispatch, useCartQuantity } from '../store/hooks';
+import { useAppDispatch } from '../store/hooks';
 import { removeCartItem, setQuantity } from '../store/actions/cartActions';
 import { showNotification } from '../store/actions/notificationActions';
 import { formatPrice, getDiscountedPrice } from '../const/format';
-import { CART_LIMIT_MESSAGE, MAX_PRODUCT_QUANTITY } from '../const/cart';
+import { MAX_PRODUCT_QUANTITY } from '../const/cart';
 import './CartItem.css';
 
 /**
@@ -14,8 +14,7 @@ import './CartItem.css';
  */
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
-  const { id, title, price, discount = 0, image } = item;
-  const quantity = useCartQuantity(id) || 0;
+  const { id, title, price, discount = 0, image,quantity } = item;
   const discountedPrice = getDiscountedPrice(price, discount);
   const isLimitReached = quantity >= MAX_PRODUCT_QUANTITY;
 
@@ -42,8 +41,8 @@ function CartItem({ item }) {
       </td>
       <td className="cart-item__cell">
         <div className="cart-item__price-wrap">
-          {discount > 0 && <span className="cart-item__old-price">{formatPrice(price)}</span>}
-          <span>{formatPrice(discountedPrice)}</span>
+          {discount > 0 && <del className="cart-item__old-price">{formatPrice(price)}</del>}
+          <span className="cart-item__current-price">{formatPrice(discountedPrice)}</span>
         </div>
       </td>
       <td className="cart-item__cell">
@@ -68,7 +67,7 @@ function CartItem({ item }) {
         </div>
       </td>
       <td className="cart-item__cell cart-item__cell--total">
-        {formatPrice(discountedPrice * quantity)}
+        <strong className="cart-item__total-price">{formatPrice(discountedPrice * quantity)}</strong>
       </td>
       <td className="cart-item__cell">
         <button

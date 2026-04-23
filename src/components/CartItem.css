@@ -22,6 +22,10 @@
   color: var(--accent, #2563eb);
 }
 
+.cart-item__total-price {
+  font-weight: inherit;
+}
+
 .cart-item__price-wrap {
   display: flex;
   flex-direction: column;
@@ -32,6 +36,10 @@
   font-size: 0.8rem;
   color: var(--text-muted, #666);
   text-decoration: line-through;
+}
+
+.cart-item__current-price {
+  color: inherit;
 }
 
 .cart-item__cell:last-child {
