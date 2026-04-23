@@ -31,24 +31,30 @@ export default function ProductPage() {
   return (
     <main className="product-page">
       <div className="product-page__inner">
-        <Link to="/" className="product-page__breadcrumb">
-          ← Каталог
-        </Link>
-        <div className="product-page__content">
-          <div className="product-page__gallery">
+        <nav className="product-page__breadcrumb-nav" aria-label="Хлебные крошки">
+          <ol className="product-page__breadcrumb-list">
+            <li className="product-page__breadcrumb-item">
+              <Link to="/" className="product-page__breadcrumb">
+                ← Каталог
+              </Link>
+            </li>
+          </ol>
+        </nav>
+        <article className="product-page__content">
+          <section className="product-page__gallery" aria-label="Изображение товара">
             <img
               className="product-page__image"
               src={image.replace('w=400', 'w=600')}
               alt={title}
             />
-          </div>
-          <div className="product-page__info">
+          </section>
+          <section className="product-page__info" aria-label="Описание товара">
             <h1 className="product-page__title">{title}</h1>
             <p className="product-page__description">{description}</p>
             <p className="product-page__price">{formatPrice(price)}</p>
             <AddCartButton product={product} className="product-page__btn" />
-          </div>
-        </div>
+          </section>
+        </article>
       </div>
     </main>
   );

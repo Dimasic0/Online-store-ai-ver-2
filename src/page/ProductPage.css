@@ -8,9 +8,23 @@
   margin: 0 auto;
 }
 
+.product-page__breadcrumb-nav {
+  margin-bottom: 1.5rem;
+}
+
+.product-page__breadcrumb-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-page__breadcrumb-item {
+  margin: 0;
+  padding: 0;
+}
+
 .product-page__breadcrumb {
   display: inline-block;
-  margin-bottom: 1.5rem;
   font-size: 0.95rem;
   color: var(--accent, #2563eb);
   text-decoration: none;

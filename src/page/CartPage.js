@@ -68,18 +68,21 @@ export default function CartPage() {
   return (
     <main className="cart">
       <div className="cart__inner">
-        <div className="cart__header">
+        <header className="cart__header">
           <h1 className="cart__title">Корзина</h1>
           <span className="cart__count">{cartCount} товар(ов)</span>
-        </div>
+        </header>
         <div className="cart__table-wrap">
           <table className="cart__table">
+            <caption className="visually-hidden ">
+              Список товаров в корзине с ценой, количеством, суммой и действиями
+            </caption>
             <thead>
               <tr>
-                <th>Товар</th>
-                <th>Цена</th>
-                <th>Количество</th>
-                <th>Сумма</th>
+                <th scope="col">Товар</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Сумма</th>
                 <th scope="col">Действия</th>
               </tr>
             </thead>
@@ -90,8 +93,8 @@ export default function CartPage() {
             </tbody>
           </table>
         </div>
-        <div className="cart__footer">
-          <div className="cart__promo">
+        <footer className="cart__footer">
+          <section className="cart__promo" aria-label="Промокод">
             <label className="cart__promo-label" htmlFor="promo-code-input">
               Промокод
             </label>
@@ -112,11 +115,13 @@ export default function CartPage() {
                 className={`cart__promo-message cart__promo-message--${
                   hasPromoDiscount ? 'success' : 'error'
                 }`}
+                role="status"
+                aria-live="polite"
               >
                 {promoStatus}
               </p>
             ) : null}
-          </div>
+          </section>
           <div className="cart__total cart__total--before">
             Сумма до скидки: <strong>{formatPrice(cartTotal)}</strong>
           </div>
@@ -132,7 +137,7 @@ export default function CartPage() {
               Оформить заказ
             </button>
           </div>
-        </div>
+        </footer>
       </div>
     </main>
   );
