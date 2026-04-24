@@ -79,11 +79,21 @@ export default function CartPage() {
             </caption>
             <thead>
               <tr>
-                <th scope="col">Товар</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Количество</th>
-                <th scope="col">Сумма</th>
-                <th scope="col">Действия</th>
+                <th className="cart__head-cell" scope="col">
+                  Товар
+                </th>
+                <th className="cart__head-cell" scope="col">
+                  Цена
+                </th>
+                <th className="cart__head-cell" scope="col">
+                  Количество
+                </th>
+                <th className="cart__head-cell" scope="col">
+                  Сумма
+                </th>
+                <th className="cart__head-cell cart__head-cell--actions" scope="col">
+                  Действия
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -122,13 +132,20 @@ export default function CartPage() {
               </p>
             ) : null}
           </section>
-          <div className="cart__total cart__total--before">
-            Сумма до скидки: <strong>{formatPrice(cartTotal)}</strong>
-          </div>
-          <div className="cart__total">
-            Сумма после скидки:{' '}
-            <strong>{formatPrice(totalAfterDiscount)}</strong>
-          </div>
+          <dl className="cart__totals" aria-label="Итоговые суммы корзины">
+            <div className="cart__total cart__total--before">
+              <dt>Сумма до скидки:</dt>
+              <dd>
+                <strong>{formatPrice(cartTotal)}</strong>
+              </dd>
+            </div>
+            <div className="cart__total">
+              <dt>Сумма после скидки:</dt>
+              <dd>
+                <strong>{formatPrice(totalAfterDiscount)}</strong>
+              </dd>
+            </div>
+          </dl>
           <div className="cart__actions">
             <button type="button" className="cart__btn cart__btn--secondary" onClick={handleClearCart}>
               Очистить корзину

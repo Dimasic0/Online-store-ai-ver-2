@@ -41,13 +41,14 @@ export default function ProductPage() {
           </ol>
         </nav>
         <article className="product-page__content">
-          <section className="product-page__gallery" aria-label="Изображение товара">
+          <figure className="product-page__gallery">
             <img
               className="product-page__image"
               src={image.replace('w=400', 'w=600')}
               alt={title}
             />
-          </section>
+            <figcaption className="visually-hidden">Изображение товара: {title}</figcaption>
+          </figure>
           <section className="product-page__info" aria-label="Описание товара">
             <h1 className="product-page__title">{title}</h1>
             <p className="product-page__description">{description}</p>

@@ -31,14 +31,14 @@ function CartItem({ item }) {
 
   return (
     <tr className="cart-item">
-      <td className="cart-item__cell cart-item__cell--product">
+      <th scope="row" className="cart-item__cell cart-item__cell--product">
         <div className="cart-item__product">
           <div className="cart-item__image-wrap">
             <img className="cart-item__image" src={image} alt={title} />
           </div>
           <span className="cart-item__title">{title}</span>
         </div>
-      </td>
+      </th>
       <td className="cart-item__cell">
         <div className="cart-item__price-wrap">
           {discount > 0 && <del className="cart-item__old-price">{formatPrice(price)}</del>}

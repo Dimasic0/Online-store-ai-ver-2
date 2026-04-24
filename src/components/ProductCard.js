@@ -27,10 +27,12 @@ function ProductCard({ product }) {
         </h2>
         <p className="product-card__description">{description}</p>
         <div className="product-card__footer">
-          <div className="product-card__price-wrap">
+          <p className="product-card__price-wrap">
             {discount > 0 && <del className="product-card__old-price">{formatPrice(price)}</del>}
-            <span className="product-card__price">{formatPrice(discountedPrice)}</span>
-          </div>
+            <data className="product-card__price" value={discountedPrice}>
+              {formatPrice(discountedPrice)}
+            </data>
+          </p>
           <AddCartButton
             product={product}
             className="product-card__btn"
