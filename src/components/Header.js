@@ -16,7 +16,7 @@ function Header() {
         <Link to="/" className="header__logo">
           Магазин
         </Link>
-        <nav className="header__nav">
+        <nav className="header__nav" aria-label="Основная навигация">
           <ul className="header__menu">
             <li className="header__menu-item">
               <NavLink

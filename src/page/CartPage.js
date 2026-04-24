@@ -132,28 +132,30 @@ export default function CartPage() {
               </p>
             ) : null}
           </section>
-          <dl className="cart__totals" aria-label="Итоговые суммы корзины">
-            <div className="cart__total cart__total--before">
-              <dt>Сумма до скидки:</dt>
-              <dd>
-                <strong>{formatPrice(cartTotal)}</strong>
-              </dd>
-            </div>
-            <div className="cart__total">
-              <dt>Сумма после скидки:</dt>
-              <dd>
-                <strong>{formatPrice(totalAfterDiscount)}</strong>
-              </dd>
-            </div>
-          </dl>
-          <div className="cart__actions">
+          <section aria-label="Итог по корзине">
+            <dl className="cart__totals" aria-label="Итоговые суммы корзины">
+              <div className="cart__total cart__total--before">
+                <dt>Сумма до скидки:</dt>
+                <dd>
+                  <strong>{formatPrice(cartTotal)}</strong>
+                </dd>
+              </div>
+              <div className="cart__total">
+                <dt>Сумма после скидки:</dt>
+                <dd>
+                  <strong>{formatPrice(totalAfterDiscount)}</strong>
+                </dd>
+              </div>
+            </dl>
+          </section>
+          <section className="cart__actions" aria-label="Действия с корзиной">
             <button type="button" className="cart__btn cart__btn--secondary" onClick={handleClearCart}>
               Очистить корзину
             </button>
             <button type="button" className="cart__btn cart__btn--primary">
               Оформить заказ
             </button>
-          </div>
+          </section>
         </footer>
       </div>
     </main>

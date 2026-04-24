@@ -38,6 +38,11 @@ export default function ProductPage() {
                 ← Каталог
               </Link>
             </li>
+            <li className="product-page__breadcrumb-item visually-hidden" aria-current="page">
+              <span className="product-page__breadcrumb" aria-label={`Текущая страница: ${title}`}>
+                {title}
+              </span>
+            </li>
           </ol>
         </nav>
         <article className="product-page__content">

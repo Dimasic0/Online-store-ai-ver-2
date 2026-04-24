@@ -14,7 +14,7 @@ import './CartItem.css';
  */
 function CartItem({ item }) {
   const dispatch = useAppDispatch();
-  const { id, title, price, discount = 0, image,quantity } = item;
+  const { id, title, price, discount = 0, image, quantity } = item;
   const discountedPrice = getDiscountedPrice(price, discount);
   const isLimitReached = quantity >= MAX_PRODUCT_QUANTITY;
 
@@ -42,7 +42,9 @@ function CartItem({ item }) {
       <td className="cart-item__cell">
         <div className="cart-item__price-wrap">
           {discount > 0 && <del className="cart-item__old-price">{formatPrice(price)}</del>}
-          <span className="cart-item__current-price">{formatPrice(discountedPrice)}</span>
+          <data className="cart-item__current-price" value={discountedPrice}>
+            {formatPrice(discountedPrice)}
+          </data>
         </div>
       </td>
       <td className="cart-item__cell">
@@ -55,7 +57,9 @@ function CartItem({ item }) {
           >
             −
           </button>
-          <span className="cart-item__qty-value">{quantity}</span>
+          <output className="cart-item__qty-value" aria-live="polite">
+            {quantity}
+          </output>
           <button
             type="button"
             className="cart-item__qty-btn"
